@@ -8,7 +8,7 @@ import java.util.Optional;
 import org.springframework.lang.Nullable;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
-    Optional<Book> findBookByTitle(String title);
+    Optional<Book>  findBookByTitle(String title);
 
     Book readByTitle(String title);
 
