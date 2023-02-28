@@ -5,6 +5,8 @@ import com.elr.elr.domain.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
+import java.util.stream.Stream;
+
 import org.springframework.lang.Nullable;
 
 public interface BookRepository extends JpaRepository<Book, Long> {
@@ -14,4 +16,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Nullable
     Book getByTitle(@Nullable String title);
+
+    Stream<Book> findAllByTitleNotNull();
 }
