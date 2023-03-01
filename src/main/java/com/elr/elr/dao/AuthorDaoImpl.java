@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class AuthorDaoImpl implements AuthorDao {
-
+    //Author CRUD Operations
     private final AuthorRepository authorRepository;
 
     public AuthorDaoImpl(AuthorRepository authorRepository) {

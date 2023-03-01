@@ -27,6 +27,38 @@ public class BookRepositoryTest {
     @Autowired
     BookRepository bookRepository;
 
+    ////JPA Named Queries
+    @Test
+    void testBookJPANamedQuery() {
+        Book book = bookRepository.jpaNamed("Clean Code");
+        assertThat(book).isNotNull();
+    }
+
+    //Native SQL Queries
+    @Test
+    void testBookQueryNative() {
+        Book book = bookRepository.findBookByTitleNativeQuery("Clean Code");
+        assertThat(book).isNotNull();
+    }
+
+    //Named Parameters with @Query
+    @Test
+    void testBookQueryNamed() {
+        Book book = bookRepository.findBookByTitleWithQueryNamed("Clean Code");
+        assertThat(book).isNotNull();
+    }
+
+
+    ////Declaring Queries Using @Query
+    @Test
+    void testBookQuery() {
+        Book book = bookRepository.findBookByTitleWithQuery("Clean Code");
+
+        assertThat(book).isNotNull();
+    }
+
+
+    //Asynchronous Query Results
     @Test
     void testBookFuture() throws ExecutionException, InterruptedException {
         Future<Book> bookFuture=bookRepository.queryByTitle("Clean Code");
@@ -37,7 +69,7 @@ public class BookRepositoryTest {
 
 
     }
-
+    //Stream Query Results
     @Test
     void testBookStream() {
         AtomicInteger count = new AtomicInteger();
@@ -56,12 +88,13 @@ public class BookRepositoryTest {
             Book book = bookRepository.readByTitle("foobar4");
         });
     }
-
+    // // Null Handling
     @Test
     void testNullParam() {
         assertNull(bookRepository.getByTitle(null));
     }
 
+    // // Null Handling
     @Test
     void testNoException() {
 
